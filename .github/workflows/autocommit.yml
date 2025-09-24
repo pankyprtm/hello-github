@@ -5,6 +5,9 @@ on:
   schedule:
     - cron: "0 0 * * *"    # otomatis tiap jam 00:00 UTC (07:00 WIB)
 
+permissions:
+  contents: write    # <--- WAJIB biar bisa push ke repo
+
 jobs:
   auto-commit:
     runs-on: ubuntu-latest
