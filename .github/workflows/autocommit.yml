@@ -1,31 +1,28 @@
-
-
-
-
-
-
 name: Daily Commit
 
 on:
+  workflow_dispatch:       # bisa dijalankan manual
   schedule:
-    - cron: '0 0 * * *'   # jalan tiap hari jam 00:00 UTC (07:00 WIB)
-  workflow_dispatch:       # bisa dijalankan manual dari tab Actions di GitHub
+    - cron: "0 0 * * *"    # otomatis tiap jam 00:00 UTC (07:00 WIB)
 
 jobs:
-  build:
+  auto-commit:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Setup Git
+      - name: Set up Git
         run: |
-          git config user.name "pankyprtm"
-          git config user.email "pankyprtm@gmail.com"
+          git config --global user.name "pankyprtm"
+          git config --global user.email "pankyprtm@gmail.com"
 
-      - name: Make daily commit
+      - name: Create/Update file
         run: |
           echo "Auto update on $(date)" >> daily.txt
+
+      - name: Commit & Push
+        run: |
           git add daily.txt
-          git commit -m "chore: daily commit $(date)" || echo "No changes"
+          git commit -m "chore: daily auto commit" || echo "Nothing to commit"
           git push
