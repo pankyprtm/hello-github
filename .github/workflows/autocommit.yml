@@ -1,4 +1,10 @@
- name: Daily Commit
+
+
+
+
+
+
+name: Daily Commit
 
 on:
   schedule:
@@ -23,20 +29,3 @@ jobs:
           git add daily.txt
           git commit -m "chore: daily commit $(date)" || echo "No changes"
           git push
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
